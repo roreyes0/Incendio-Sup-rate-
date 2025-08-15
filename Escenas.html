@@ -82,35 +82,35 @@
         situation: "Un estudiante se separó del grupo.",
         options: [
           { text: "Vuelves a buscarlo.", next: 3 },
-          { text: "2. Lo llamas desde lejos.", next: 8 }
+          { text: "Lo llamas desde lejos.", next: 8 }
         ]
       },
       {
         situation: "Una becaria está en shock. No se mueve.",
         options: [
-          { text: "1. La calmas con palabras.", next: 9 },
-          { text: "2. La cargas y sales corriendo.", next: 4 }
+          { text: "La calmas con palabras.", next: 9 },
+          { text: "La cargas y sales corriendo.", next: 4 }
         ]
       },
       {
         situation: "Te queda poco oxígeno. Tu garganta arde.",
         options: [
-          { text: "1. Sigues ayudando.", next: 5 },
-          { text: "2. Sales al patio para recuperarte.", next: 10 }
+          { text: "Sigues ayudando.", next: 5 },
+          { text: "Sales al patio para recuperarte.", next: 10 }
         ]
       },
-        {
+      {
         situation: "Te das cuenta de que falta una sola persona.",
         options: [
-          { text: "1. Entras una vez más, con riesgo.", next: 16 },
-          { text: "2. Decides cerrar la puerta y evacuar tú.", next: 6 }
+          { text: "Entras una vez más, con riesgo.", next: 16 },
+          { text: "Decides cerrar la puerta y evacuar tú.", next: 6 }
         ]
       },
-       {
+      {
         situation: "Estás solo afuera. Escuchas gritos desde adentro.",
         options: [
-          { text: "No entras. Observas desde lejos", next: 19 },
-          { text: "Vuelves una ultima vez.", next: 20 }
+          { text: "No entras. Observas desde lejos", url: "defeat.html" },
+          { text: "Vuelves una ultima vez.", url: "victoryEnd.html" }
         ]
       },
       {
@@ -130,71 +130,71 @@
       {
         situation: "El humo es muy espeso. Hay un estudiante más adentro.",
         options: [
-          { text: "1. Regresas a buscarlo.", next: 5  },
-          { text: "2. Decides que es muy tarde.", next: 10 }
+          { text: "Regresas a buscarlo.", next: 5  },
+          { text: "Decides que es muy tarde.", next: 10 }
         ]
       },
       {
         situation: "El fuego está muy fuerte. Tu cuerpo no aguanta más.",
         options: [
-          { text: "1. Ayudas a uno más antes de salir.", next: 15 },
-          { text: "2. Escapas solo.", next: 6 }
+          { text: "Ayudas a uno más antes de salir.", next: 15 },
+          { text: "Escapas solo.", next: 6 }
         ]
       },
       {
         situation: "Tú y Sagas deben dividirse.",
         options: [
           { text: "Él va a un lado, tú al otro.", next: 12 },
-          { text: "2. Se quedan juntos y enfrentan el lado más riesgoso.", next: 16 }
+          { text: "Se quedan juntos y enfrentan el lado más riesgoso.", next: 16 }
         ]
       },
       {
         situation: "Sagas se lastima. Grita por ayuda.",
         options: [
-          { text: "1. Lo levantas tú solo.", next: 13 },
-          { text: "2. Pides ayuda a un estudiante cercano.", next: 17  }
+          { text: "Lo levantas tú solo.", next: 13 },
+          { text: "Pides ayuda a un estudiante cercano.", next: 17  }
         ]
       },
       {
         situation: "Sagas está débil, otro estudiante en riesgo.",
         options: [
-          { text: "1. Acompañas a Sagas a salir.", next: 18 },
-          { text: "2. Vas con el otro estudiante.", next: 14 }
+          { text: "Acompañas a Sagas a salir.", next: 18 },
+          { text: "Vas con el otro estudiante.", next: 14 }
         ]
       },
       {
         situation: "Ves a Sagas inconsciente. Otro estudiante grita pidiendo ayuda.",
         options: [
-          { text: "1. Vas por Sagas.", next: 15 },
-          { text: "2. Vas por el estudiante.", next: 6 }
+          { text: "Vas por Sagas.", next: 15 },
+          { text: "Vas por el estudiante.", next: 6 }
         ]
       },
       {
         situation: "Última salida. Estás débil, ves a un estudiante.",
         options: [
-          { text: "Lo empujas a salir antes que tú.", next: 20 },
-          { text: "Sales tú primero.", next: 19 }
+          { text: "Lo empujas a salir antes que tú.", url: "victoryEnd.html" },
+          { text: "Sales tú primero.", url: "defeat.html" }
         ]
       },
       {
         situation: "Una salida está bloqueada.",
         options: [
-          { text: "1. Golpeas la puerta hasta abrirla.", next: 13 },
-          { text: "2. Buscan juntos otra ruta.", next: 17 }
+          { text: "Golpeas la puerta hasta abrirla.", next: 13 },
+          { text: "Buscan juntos otra ruta.", next: 17 }
         ]
       },
       {
         situation: "Una parte del techo está por caer.",
         options: [
-          { text: "1. Pasan rápido.", next: 18 },
-          { text: "2. Buscan una ruta más segura.", next: 14 }
+          { text: "Pasan rápido.", next: 18 },
+          { text: "Buscan una ruta más segura.", next: 14 }
         ]
       },
       {
         situation: "Encuentras al Señor de la Tienda filmando.",
         options: [
-          { text: "1. Le exiges que ayude.", next: 15 },
-          { text: "2. Lo ignoras y sigues evacuando.", next: 6 }
+          { text: "Le exiges que ayude.", next: 15 },
+          { text: "Lo ignoras y sigues evacuando.", next: 6 }
         ]
       },
     ];
@@ -224,7 +224,9 @@
         const btn = document.createElement('button');
         btn.textContent = opt.text;
         btn.onclick = () => {
-          if(opt.next !== null && story[opt.next]) {
+          if (opt.url) {
+            window.location.href = opt.url;
+          } else if (opt.next !== null && story[opt.next]) {
             currentIndex = opt.next;
             showSituation();
           } else {

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escenas Retro</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .typewriter {
+      overflow: hidden;
+      white-space: pre-wrap;
+      border-right: .15em solid #b3e5fc;
+      animation: blink .7s step-end infinite;
+    }
+
+    .scene {
+      display: none;
+    }
+
+    .scene.active {
+      display: flex;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-[#000033] flex items-center justify-center min-h-screen">
+
+  <!-- Escena 1 -->
+  <div id="scene1" class="scene active flex-col items-center justify-center w-full h-full">
+    <div class="max-w-3xl border border-[#b3e5fc] p-6 mb-4">
+      <p id="text1" class="typewriter text-[#b3e5fc] text-center text-sm"></p>
+    </div>
+    <div class="flex gap-4">
+      <button onclick="nextScene()" class="bg-[#b3e5fc] text-[#000033] px-4 py-2 rounded">Siguiente</button>
+    </div>
+  </div>
+
+  <!-- Escena 2 -->
+  <div id="scene2" class="scene flex-col items-center justify-center w-full h-full">
+    <div class="max-w-3xl border border-[#b3e5fc] p-6 mb-4">
+      <p id="text2" class="typewriter text-[#b3e5fc] text-center text-sm"></p>
+    </div>
+    <div class="flex gap-4">
+      <button onclick="prevScene()" class="bg-[#b3e5fc] text-[#000033] px-4 py-2 rounded">Anterior</button>
+      <button onclick="nextScene()" class="bg-[#b3e5fc] text-[#000033] px-4 py-2 rounded">Siguiente</button>
+    </div>
+  </div>
+
+  <!-- Escena 3 -->
+  <div id="scene3" class="scene flex-col items-center justify-center w-full h-full">
+    <div class="max-w-3xl border border-[#b3e5fc] p-6 mb-4">
+      <p id="text3" class="typewriter text-[#b3e5fc] text-center text-sm"></p>
+    </div>
+    <div class="flex gap-4">
+      <button onclick="prevScene()" class="bg-[#b3e5fc] text-[#000033] px-4 py-2 rounded">Anterior</button>
+      <button onclick="nextScene()" class="bg-[#b3e5fc] text-[#000033] px-4 py-2 rounded">Siguiente</button>
+    </div>
+  </div>
+
+  <!-- Escena 4 (Pantalla de decisión) -->
+  <div id="scene4" class="scene flex-col items-center justify-center w-full h-full">
+    <div class="max-w-3xl border border-[#b3e5fc] p-6 mb-4">
+      <p id="text4" class="typewriter text-[#b3e5fc] text-center text-sm"></p>
+    </div>
+    <div class="flex gap-4">
+      <button class="bg-[#00e5ff] text-[#000033] px-4 py-2 rounded"><a href="Escenas.html">Tomar decisión</a></button>
+    </div>
+  </div>
+
+  <script>
+    const scenesText = [
+`ES UNA TARDE CALUROSA EN EL
+CENTRO ¡SUPÉRATE!.
+WALTER, TEACHER DE INGLÉS,
+REVISA UNOS PROYECTOS FINALES
+MIENTRAS LOS ESTUDIANTES
+CONVERSAN ANIMADAMENTE EN EL
+PASILLO.`,
+
+`PRIMERO ES UN OLOR EXTRAÑO.
+LUEGO, HUMO QUE SE CUELA POR
+DEBAJO DE LA PUERTA DE LA COCINA.
+Y FINALMENTE, LA ALARMA. GRITOS.
+CAOS.`,
+
+`EL FUEGO HA COMENZADO.
+LOS ESTUDIANTES CORREN EN
+TODAS DIRECCIONES. ALGUNOS SE
+PARALIZAN. OTROS LLORAN.
+EL MIEDO SE APODERA DEL
+AMBIENTE.`,
+
+`WALTER SABE QUE NO PUEDE
+ESPERAR A QUE ALGUIEN MÁS ACTÚE.
+DEBE DECIDIR: ¿CÓMO PROTEGERÁ A
+LOS ESTUDIANTES?
+Y LO MÁS IMPORTANTE: ¿QUÉ
+SACRIFICIOS ESTÁ DISPUESTO A
+HACER POR EL BIEN DE TODOS?`
+    ];
+
+    const textElements = [
+      document.getElementById('text1'),
+      document.getElementById('text2'),
+      document.getElementById('text3'),
+      document.getElementById('text4')
+    ];
+
+    let currentScene = 0;
+
+    function typeWriter(text, element) {
+      let i = 0;
+      element.innerHTML = '';
+      function typing() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typing, 80); // Velocidad para lectura cómoda
+        }
+      }
+      typing();
+    }
+
+    function showScene(index) {
+      document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+      document.getElementById(`scene${index+1}`).classList.add('active');
+      typeWriter(scenesText[index], textElements[index]);
+    }
+
+    function nextScene() {
+      if (currentScene < scenesText.length - 1) {
+        currentScene++;
+        showScene(currentScene);
+      }
+    }
+
+    function prevScene() {
+      if (currentScene > 0) {
+        currentScene--;
+        showScene(currentScene);
+      }
+    }
+
+    // Inicia en la primera pantalla
+    showScene(currentScene);
+  </script>
+
+</body>
+</html>

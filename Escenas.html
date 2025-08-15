@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historia Interactiva</title>
+
+  <!-- Fuente Pixelada -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Press Start 2P', monospace;
+      background-color: #000033;
+      color: #b3e5fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+      flex-direction: column;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .typewriter {
+      overflow: hidden;
+      white-space: pre-wrap;
+      border-right: .15em solid #b3e5fc;
+      animation: blink .7s step-end infinite;
+      max-width: 600px;
+      margin-bottom: 1rem;
+    }
+
+    .decision-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .decision-buttons button {
+      background-color: #b3e5fc;
+      color: #000033;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 0.25rem;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.7rem;
+    }
+
+    .decision-buttons button:hover {
+      background-color: #00e5ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="typewriter" id="situation"></div>
+  <div class="decision-buttons" id="options"></div>
+
+  <script>
+    const story = [
+      {
+        situation: "Empieza el incendio. Humo en el pasillo. Caos.",
+        options: [
+          { text: "Gritas para que los estudiantes se calmen y salgan.", next: 1 },
+          { text: "Buscas a Sagas para organizar la evacuación.", next: 11 }
+        ]
+      },
+      {
+        situation: "Fuego en la cocina. Estudiantes atrapados.",
+        options: [
+          { text: "Entras tú solo a ayudarlos.", next: 7 },
+          { text: "Buscas un extintor primero.", next: 2 }
+        ]
+      },
+      {
+        situation: "Un estudiante se separó del grupo.",
+        options: [
+          { text: "Vuelves a buscarlo.", next: 3 },
+          { text: "2. Lo llamas desde lejos.", next: 8 }
+        ]
+      },
+      {
+        situation: "Una becaria está en shock. No se mueve.",
+        options: [
+          { text: "1. La calmas con palabras.", next: 9 },
+          { text: "2. La cargas y sales corriendo.", next: 4 }
+        ]
+      },
+      {
+        situation: "Te queda poco oxígeno. Tu garganta arde.",
+        options: [
+          { text: "1. Sigues ayudando.", next: 5 },
+          { text: "2. Sales al patio para recuperarte.", next: 10 }
+        ]
+      },
+        {
+        situation: "Te das cuenta de que falta una sola persona.",
+        options: [
+          { text: "1. Entras una vez más, con riesgo.", next: 16 },
+          { text: "2. Decides cerrar la puerta y evacuar tú.", next: 6 }
+        ]
+      },
+       {
+        situation: "Estás solo afuera. Escuchas gritos desde adentro.",
+        options: [
+          { text: "No entras. Observas desde lejos", next: 19 },
+          { text: "Vuelves una ultima vez.", next: 20 }
+        ]
+      },
+      {
+        situation: "Un estudiante está atrapado por muebles caídos.",
+        options: [
+          { text: "Lo liberas a la fuerza.", next: 3 },
+          { text: "Buscas ayuda rápidamente.", next: 8 }
+        ]
+      },
+      {
+        situation: "Ves que otro grupo no ha evacuado.",
+        options: [
+          { text: "Intentas dirigirlos con gritos.", next: 9 },
+          { text: "Te unes a ellos para guiar.", next: 4 }
+        ]
+      },
+      {
+        situation: "El humo es muy espeso. Hay un estudiante más adentro.",
+        options: [
+          { text: "1. Regresas a buscarlo.", next: 5  },
+          { text: "2. Decides que es muy tarde.", next: 10 }
+        ]
+      },
+      {
+        situation: "El fuego está muy fuerte. Tu cuerpo no aguanta más.",
+        options: [
+          { text: "1. Ayudas a uno más antes de salir.", next: 15 },
+          { text: "2. Escapas solo.", next: 6 }
+        ]
+      },
+      {
+        situation: "Tú y Sagas deben dividirse.",
+        options: [
+          { text: "Él va a un lado, tú al otro.", next: 12 },
+          { text: "2. Se quedan juntos y enfrentan el lado más riesgoso.", next: 16 }
+        ]
+      },
+      {
+        situation: "Sagas se lastima. Grita por ayuda.",
+        options: [
+          { text: "1. Lo levantas tú solo.", next: 13 },
+          { text: "2. Pides ayuda a un estudiante cercano.", next: 17  }
+        ]
+      },
+      {
+        situation: "Sagas está débil, otro estudiante en riesgo.",
+        options: [
+          { text: "1. Acompañas a Sagas a salir.", next: 18 },
+          { text: "2. Vas con el otro estudiante.", next: 14 }
+        ]
+      },
+      {
+        situation: "Ves a Sagas inconsciente. Otro estudiante grita pidiendo ayuda.",
+        options: [
+          { text: "1. Vas por Sagas.", next: 15 },
+          { text: "2. Vas por el estudiante.", next: 6 }
+        ]
+      },
+      {
+        situation: "Última salida. Estás débil, ves a un estudiante.",
+        options: [
+          { text: "Lo empujas a salir antes que tú.", next: 20 },
+          { text: "Sales tú primero.", next: 19 }
+        ]
+      },
+      {
+        situation: "Una salida está bloqueada.",
+        options: [
+          { text: "1. Golpeas la puerta hasta abrirla.", next: 13 },
+          { text: "2. Buscan juntos otra ruta.", next: 17 }
+        ]
+      },
+      {
+        situation: "Una parte del techo está por caer.",
+        options: [
+          { text: "1. Pasan rápido.", next: 18 },
+          { text: "2. Buscan una ruta más segura.", next: 14 }
+        ]
+      },
+      {
+        situation: "Encuentras al Señor de la Tienda filmando.",
+        options: [
+          { text: "1. Le exiges que ayude.", next: 15 },
+          { text: "2. Lo ignoras y sigues evacuando.", next: 6 }
+        ]
+      },
+    ];
+
+    let currentIndex = 0;
+    const situationElement = document.getElementById('situation');
+    const optionsElement = document.getElementById('options');
+
+    function typeWriter(text, callback) {
+      let i = 0;
+      situationElement.innerHTML = '';
+      function typing() {
+        if(i < text.length){
+          situationElement.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typing, 20);
+        } else if(callback) {
+          callback();
+        }
+      }
+      typing();
+    }
+
+    function showOptions(options) {
+      optionsElement.innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.textContent = opt.text;
+        btn.onclick = () => {
+          if(opt.next !== null && story[opt.next]) {
+            currentIndex = opt.next;
+            showSituation();
+          } else {
+            situationElement.innerHTML = "Fin de la ruta seleccionada.";
+            optionsElement.innerHTML = '';
+          }
+        };
+        optionsElement.appendChild(btn);
+      });
+    }
+
+    function showSituation() {
+      typeWriter(story[currentIndex].situation, () => {
+        showOptions(story[currentIndex].options);
+      });
+    }
+
+    showSituation();
+  </script>
+
+</body>
+</html>

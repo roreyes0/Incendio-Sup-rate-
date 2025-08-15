@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Incendio en ¡Supérate!</title>
+  <title>Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
+    body {
+      background: url('imgs/PuertaLlamas.png') no-repeat center center;
+      background-size: cover;
+    }
     .pixel-btn {
       font-family: 'Press Start 2P', cursive;
       background-color: #e40000;
@@ -23,42 +27,40 @@
     }
   </style>
 </head>
-<body class="bg-gray-200 flex items-center justify-center h-screen relative overflow-hidden">
+<body class="flex items-center justify-center h-screen relative overflow-hidden">
 
-  <!-- Fondo pared -->
-  <div class="bg-gray-300 border-4 border-gray-400 w-full h-screen relative rounded-lg overflow-hidden">
+ 
+  <div class="w-full h-screen relative rounded-lg overflow-hidden">
 
-    <!-- Vidas -->
+   
     <div class="absolute top-3 left-3 flex items-center space-x-1">
       <span class="text-red-500 text-3xl">❤️</span>
       <span class="text-red-500 text-3xl">❤️</span>
       <span class="text-red-500 text-3xl">❤️</span>
     </div>
 
-    <!-- Calavera -->
-    <div class="absolute top-3 left-28 text-3xl">💀</div>
+   
 
-    <!-- Flechas -->
+  
     <div class="absolute top-4 left-48 text-2xl">»»</div>
 
-    <!-- Texto principal -->
+    
     <div class="flex flex-col items-center justify-center h-full text-center">
-      <h2 class="text-xs tracking-widest" style="font-family: 'Press Start 2P', cursive; color: #590113">EL INCENDIO EN</h2>
-      <h1 class="font-bold text-4xl" style="font-family: 'Press Start 2P', cursive; color: #930000;">¡SUPÉRATE!</h1>
-      <button class="bg-[#ed1c24] px-4 py-2 rounded;" style="font-family: 'Press Start 2P', cursive; color: #FFFF;"><a href="index.html">Empezar</a></button>
+
+      <h2 class="text-2xl tracking-widest" style="font-family: 'Press Start 2P', cursive; color: #000000">EL INCENDIO EN</h2>
+      <h1 class="font-bold mt-5 text-7xl" style="font-family: 'Press Start 2P', cursive; color: #8a0909;">¡SUPÉRATE!</h1>
+      <button class="border-2 t-3 border-black bg-red-900 text-white font-bold hover:bg-red-600 font-mono px-10 py-2 rounded-full shadow-[3px_3px_0px_black]">EMPEZAR</button>
     </div>
 
-    <!-- Fuego -->
-    <div class="absolute bottom-0 w-full h-20 bg-gradient-to-t from-red-600 via-yellow-400 to-transparent animate-pulse">
-      <div class="absolute bottom-0 w-full text-red-500 text-4xl flex justify-center animate-bounce">
-        🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-      </div>
-    </div>
+   
 
-    <!-- Bola de fuego -->
-    <div class="absolute top-16 right-8 text-6xl animate-ping">🔥</div>
+
+   
+
+
   </div>
 
 </body>
 </html>
+
 

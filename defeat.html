@@ -32,7 +32,7 @@
 </head>
 <body class="flex items-center justify-center h-screen relative overflow-hidden text-center">
 
-  <!-- Audio de fondo -->
+
   <audio id="defeatMusic" src="imgs/derroaMusic.mp3" preload="auto" autoplay loop></audio>
 
   <!-- Calavera izquierda -->
@@ -54,7 +54,7 @@
   <script>
     const music = document.getElementById('defeatMusic');
 
-    // Si el navegador bloquea autoplay, inicia al primer clic
+    
     document.body.addEventListener('click', () => {
       if (music.paused) {
         music.play();

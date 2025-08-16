@@ -164,11 +164,11 @@ HACER POR EL BIEN DE TODOS?`
       }
     }
 
-    // Reproducir música automáticamente al cargar
+
     const bgMusic = document.getElementById('bgMusic');
     bgMusic.volume = 0.5; // volumen moderado
     bgMusic.play().catch(() => {
-      // Algunos navegadores bloquean autoplay, así que espera la interacción
+      
       document.body.addEventListener('click', () => {
         bgMusic.play();
       }, { once: true });

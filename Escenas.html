@@ -57,7 +57,11 @@
     }
   </style>
 </head>
+
 <body>
+
+  <!-- Música de fondo (loop para que no se detenga) -->
+  <audio id="bgMusic" src="imgs/pixelMusic.mp3" preload="auto" loop></audio>
 
   <div class="typewriter" id="situation"></div>
   <div class="decision-buttons" id="options"></div>
@@ -202,6 +206,7 @@
     let currentIndex = 0;
     const situationElement = document.getElementById('situation');
     const optionsElement = document.getElementById('options');
+    const bgMusic = document.getElementById('bgMusic');
 
     function typeWriter(text, callback) {
       let i = 0;
@@ -239,6 +244,11 @@
     }
 
     function showSituation() {
+      // Iniciar música solo la primera vez
+      if (currentIndex === 0 && bgMusic.paused) {
+        bgMusic.play();
+      }
+
       typeWriter(story[currentIndex].situation, () => {
         showOptions(story[currentIndex].options);
       });
@@ -249,3 +259,4 @@
 
 </body>
 </html>
+

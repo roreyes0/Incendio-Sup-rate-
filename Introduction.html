@@ -6,7 +6,6 @@
   <title>Escenas Retro</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <style>
@@ -34,6 +33,10 @@
       animation: fadeIn 0.5s ease-in-out;
     }
 
+    button {
+      cursor: pointer;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -41,6 +44,9 @@
   </style>
 </head>
 <body class="bg-[#000033] flex items-center justify-center min-h-screen">
+
+  <!-- Música de fondo -->
+  <audio id="bgMusic" src="imgs/homeMusic.mp3" loop autoplay></audio>
 
   <!-- Escena 1 -->
   <div id="scene1" class="scene active flex-col items-center justify-center w-full h-full">
@@ -132,7 +138,7 @@ HACER POR EL BIEN DE TODOS?`
         if (i < text.length) {
           element.innerHTML += text.charAt(i);
           i++;
-          setTimeout(typing, 80); // Velocidad para lectura cómoda
+          setTimeout(typing, 80); 
         }
       }
       typing();
@@ -158,9 +164,19 @@ HACER POR EL BIEN DE TODOS?`
       }
     }
 
-    // Inicia en la primera pantalla
+    // Reproducir música automáticamente al cargar
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0.5; // volumen moderado
+    bgMusic.play().catch(() => {
+      // Algunos navegadores bloquean autoplay, así que espera la interacción
+      document.body.addEventListener('click', () => {
+        bgMusic.play();
+      }, { once: true });
+    });
+
     showScene(currentScene);
   </script>
 
 </body>
 </html>
+
